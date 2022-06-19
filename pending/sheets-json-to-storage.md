@@ -76,16 +76,16 @@ and the CEL linter won't validate it for you.
 Let's take what we have and see how to put it in use in the script.
 I'm using [OAuth2 for Apps
 Script](https://github.com/googleworkspace/apps-script-oauth2) library
-for this.
+for this.  The service name is free form.
 
 ```
-var PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n ...";
-var CLIENT_EMAIL "your-service-account@your-project.iam.gserviceaccount.com";
-var BUCKET = "your-bucket";
-var FILE = "your-file.json"
+const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n ...";
+const CLIENT_EMAIL "your-service-account@your-project.iam.gserviceaccount.com";
+const BUCKET = "your-bucket";
+const FILE = "your-file.json"
 
 function getService() {
-    return OAuth2.createService("CloudStorate")
+    return OAuth2.createService("CloudStorage")
         .setTokenUrl('https://oauth2.googleapis.com/token')
 	.setPrivateKey(PRIVATE_KEY)
 	.setIssuer(CLIENT_EMAIL)
@@ -102,17 +102,17 @@ Script editor page.  It'll ask permissions for the Apps Script to use
 
 ```
 function editTrigger(e) {
-    var output = readSheet();
-    var outputStr = "--boundary\n" +
+    const output = readSheet();
+    const outputStr = "--boundary\n" +
 	"Content-Type: application/json; charset=UTF-8\n\n" +
 	JSON.stringify({'name':FILE, 'cacheControl': 'no-store'})+ "\n" +
 	"--boundary\n" +
 	"Content-Type: application/json; charset=UTF-8\n\n" +
 	JSON.stringify(output) +
 	"\n--boundary--\n";
-    var service = getService();
-    var url = "https://storage.googleapis.com/upload/storage/v1/b/"+BUCKET+"/o?name="+FILE+"&uploadType=multipart";
-    var options = {
+    const service = getService();
+    const url = "https://storage.googleapis.com/upload/storage/v1/b/"+BUCKET+"/o?name="+FILE+"&uploadType=multipart";
+    const options = {
 	'method': 'post',
 	'contentType': 'multipart/related; boundary=boundary',
 	'headers': {
@@ -120,7 +120,7 @@ function editTrigger(e) {
 	},
 	'payload': outputStr
     };
-    var response = UrlFetchApp.fetch(url, options);
+    const response = UrlFetchApp.fetch(url, options);
     Logger.log("Response status "+response.getResponseCode());
 }
 ```
