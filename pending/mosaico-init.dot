@@ -1,0 +1,16 @@
+digraph {
+  Component -> ClientModels
+  ClientInit -> Component
+  ClientHandlers -> ClientModels
+  Mosaico -> ClientModels
+  Mosaico -> ClientInit [label="fromJSProps\ngetComponents\ngetInitialValues"]
+  Mosaico -> ClientHandlers [label="clientHandlers"]
+  ServerSite -> Mosaico [label="serverRender"]
+  ServerSite -> ClientModels
+
+  Component [label="Component.*"]
+  ClientModels [label="Client.Models"]
+  ClientInit [label="Client.Init"]
+  ServerSite [label="Server.Site"]
+  ClientHandlers [label="Client.Handlers"]
+}
