@@ -1,5 +1,5 @@
 Mosaico is HBL Media's news site project.  It is written in PureScript
-and uses React via purescript-react-basic library.  It is a hybrid SPA
+and uses React via the purescript-react-basic library.  It is a hybrid SPA
 application, with server side renders covering the equivalent of using
 the site with no user account.  It uses React's hydrate method to
 seamlessly transition from a server render to a full React application
